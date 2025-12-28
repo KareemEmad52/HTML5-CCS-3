@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Login - LuxeStore</title>
+  <title>Your Cart - LuxeStore</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
     rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -20,59 +20,43 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="products.html" class="nav-link">Products</a>
         <a href="about.html" class="nav-link">About Us</a>
-        <a href="cart.html" class="nav-link">Cart <span id="cart-count-badge" class="badge">0</span></a>
+        <a href="cart.html" class="nav-link active">Cart <span id="cart-count-badge" class="badge">0</span></a>
         <a href="login.html" class="nav-button btn btn-primary">Login</a>
       </div>
     </div>
   </nav>
 
-  <section class="login-section">
-    <div class="login-card">
-      <div class="login-header">
-        <h1>Welcome Back</h1>
-        <p>Please enter your details to sign in.</p>
+  <div class="container">
+    <main class="cart-page">
+      <h1>Your Cart</h1>
+
+      <div id="empty-cart-message" style="display: none;">
+        <p>Your cart is empty.</p>
+        <a href="products.html" class="btn btn-secondary" style="margin-top: 1rem; display: inline-block;">Start
+          Shopping</a>
       </div>
 
-      <form onsubmit="event.preventDefault(); alert('Logged in successfully!');">
-        <div class="form-group">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+      <div class="cart-layout">
+        <div id="cart-items-container" class="cart-items">
+          <!-- Cart items injected here -->
         </div>
 
-        <div class="form-group">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+        <div id="cart-summary" class="cart-summary" style="display: none;">
+          <h2>Summary</h2>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="cart-total">$0.00</span>
+          </div>
+          <button class="btn btn-primary btn-block">Proceed to Checkout</button>
         </div>
-
-        <div class="form-actions">
-          <label class="form-check">
-            <input type="checkbox">
-            <span>Remember me</span>
-          </label>
-          <a href="#" class="forgot-pass">Forgot password?</a>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-full">Sign In</button>
-      </form>
-
-      <div class="social-login">
-        <div class="social-divider"><span>Or continue with</span></div>
-
-        <button class="social-btn">
-          <i class="ri-google-fill" style="color: #EA4335;"></i>
-          <span>Google</span>
-        </button>
-        <button class="social-btn">
-          <i class="ri-facebook-fill" style="color: #1877F2;"></i>
-          <span>Facebook</span>
-        </button>
       </div>
 
-      <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem;">
-        Don't have an account? <a href="#" style="color: #2563eb; font-weight: 500;">Sign up</a>
-      </p>
-    </div>
-  </section>
+    </main>
+  </div>
 
   <footer class="footer">
     <div class="container">

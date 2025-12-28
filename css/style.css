@@ -835,8 +835,142 @@ button {
     opacity: 0.9;
 }
 
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-    }
+
+
+.cart-page {
+    padding: 2rem 0;
+    min-height: 60vh;
+}
+
+.cart-layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.cart-items {
+    flex: 2;
+    min-width: 300px;
+}
+
+.cart-summary {
+    flex: 1;
+    min-width: 250px;
+    background: var(--surface-color, #f8f9fa);
+    /* Fallback */
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: fit-content;
+    border: 1px solid #eee;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #fff;
+}
+
+.cart-item-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-details h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color, #333);
+}
+
+.cart-item-price {
+    color: var(--primary-color, #666);
+    font-weight: 500;
+}
+
+.cart-item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-controls button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-controls button:hover {
+    background: #f0f0f0;
+}
+
+.remove-btn {
+    font-size: 0.85rem;
+    color: #ef4444;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.cart-item-total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    min-width: 80px;
+    text-align: right;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.summary-row.total {
+    font-weight: 700;
+    font-size: 1.3rem;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+}
+
+.btn-block {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.badge {
+    background: #ef4444;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    display: none;
+    /* Hidden by default if 0 */
+    vertical-align: middle;
+    margin-left: 4px;
 }

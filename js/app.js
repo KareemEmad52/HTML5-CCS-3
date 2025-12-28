@@ -26,7 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (window.location.pathname.includes('products.html')) {
     initProductsPage();
+  } else if (window.location.pathname.includes('cart.html')) {
+    initCartPage();
   }
+
+  updateCartCount();
 });
 
 
@@ -152,6 +156,7 @@ async function fetchProducts(url, gridElement, countElement) {
     gridElement.innerHTML = '';
 
     products.forEach(function (product) {
+      productsCache[product.id] = product;
       var card = createProductCard(product);
       gridElement.appendChild(card);
     });
@@ -174,7 +179,7 @@ function createProductCard(product) {
   html += '<div class="product-cat">' + product.category + '</div>';
   html += '<h3 class="product-title" title="' + product.title + '">' + product.title + '</h3>';
   html += '<div class="product-price">$' + product.price + '</div>';
-  html += '<button class="add-cart-btn" onclick="addToCart(\'' + product.id + '\')">';
+  html += '<button class="add-cart-btn" onclick="addToCart(' + product.id + ')">';
   html += '<i class="ri-shopping-cart-2-line"></i> Add to Cart';
   html += '</button>';
   html += '</div>';
@@ -183,8 +188,144 @@ function createProductCard(product) {
   return div;
 }
 
+var productsCache = {};
+
 function addToCart(id) {
+  var product = productsCache[id];
+  if (!product) {
+    console.error('Product not found in cache');
+    return;
+  }
+
+  var cart = getCart();
+  var existingItem = cart.find(item => item.id === id);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      thumbnail: product.thumbnail,
+      quantity: 1
+    });
+  }
+
+  saveCart(cart);
+  updateCartCount();
   alert('Product added to cart!');
+}
+
+function getCart() {
+  var cart = localStorage.getItem('cart');
+  return cart ? JSON.parse(cart) : [];
+}
+
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateCartCount() {
+  var cart = getCart();
+  var count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  var countElements = document.querySelectorAll('#cart-count-badge');
+
+  countElements.forEach(el => {
+    el.textContent = count;
+    el.style.display = count > 0 ? 'inline-flex' : 'none';
+  });
+}
+
+function initCartPage() {
+  renderCartItems();
+}
+
+function renderCartItems() {
+  var cartContainer = document.getElementById('cart-items-container');
+  var cartSummary = document.getElementById('cart-summary');
+  var emptyCartMsg = document.getElementById('empty-cart-message');
+
+  if (!cartContainer) return;
+
+  var cart = getCart();
+
+  if (cart.length === 0) {
+    cartContainer.style.display = 'none';
+    if (cartSummary) cartSummary.style.display = 'none';
+    if (emptyCartMsg) emptyCartMsg.style.display = 'block';
+    return;
+  }
+
+  if (emptyCartMsg) emptyCartMsg.style.display = 'none';
+  cartContainer.style.display = 'block';
+  if (cartSummary) cartSummary.style.display = 'block';
+
+  cartContainer.innerHTML = '';
+  var subtotal = 0;
+
+  cart.forEach(item => {
+    var itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
+
+    var itemEl = document.createElement('div');
+    itemEl.className = 'cart-item';
+    itemEl.innerHTML = `
+      <div class="cart-item-image">
+        <img src="${item.thumbnail}" alt="${item.title}">
+      </div>
+      <div class="cart-item-details">
+        <h3>${item.title}</h3>
+        <p class="cart-item-price">$${item.price}</p>
+      </div>
+      <div class="cart-item-actions">
+        <div class="quantity-controls">
+          <button onclick="updateQuantity(${item.id}, -1)">-</button>
+          <span>${item.quantity}</span>
+          <button onclick="updateQuantity(${item.id}, 1)">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+      </div>
+      <div class="cart-item-total">
+        $${itemTotal.toFixed(2)}
+      </div>
+    `;
+    cartContainer.appendChild(itemEl);
+  });
+
+  updateCartSummary(subtotal);
+}
+
+function updateQuantity(id, change) {
+  var cart = getCart();
+  var item = cart.find(item => item.id === id);
+
+  if (item) {
+    item.quantity += change;
+    if (item.quantity <= 0) {
+      removeFromCart(id);
+      return;
+    }
+    saveCart(cart);
+    renderCartItems();
+    updateCartCount();
+  }
+}
+
+function removeFromCart(id) {
+  var cart = getCart();
+  var newCart = cart.filter(item => item.id !== id);
+  saveCart(newCart);
+  renderCartItems();
+  updateCartCount();
+}
+
+function updateCartSummary(subtotal) {
+  var subtotalEl = document.getElementById('cart-subtotal');
+  var totalEl = document.getElementById('cart-total');
+
+  if (subtotalEl) subtotalEl.textContent = '$' + subtotal.toFixed(2);
+  if (totalEl) totalEl.textContent = '$' + subtotal.toFixed(2);
 }
 
 function capitalize(str) {
