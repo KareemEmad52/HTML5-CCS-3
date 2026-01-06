@@ -92,12 +92,12 @@ async function fetchCategories(listElement) {
 
       var li = document.createElement('li');
       var btn = document.createElement('button');
-      btn.className = 'category-btn';
+      btn.className = 'w-full text-left py-1 text-slate-500 hover:text-primary hover:translate-x-1 transition-all duration-200 [&.active]:font-medium [&.active]:text-primary';
       btn.textContent = capitalize(catName);
       btn.id = 'cat-' + catSlug;
 
       btn.addEventListener('click', (e) => {
-        var allBtns = document.querySelectorAll('.category-btn');
+        var allBtns = document.querySelectorAll('button[id^="cat-"]');
         allBtns.forEach(function (b) {
           b.classList.remove('active');
         });
@@ -127,7 +127,7 @@ async function fetchCategories(listElement) {
     var allBtn = document.getElementById('all-products-btn');
     if (allBtn) {
       allBtn.addEventListener('click', (e) => {
-        var allBtns = document.querySelectorAll('.category-btn');
+        var allBtns = document.querySelectorAll('button[id^="cat-"]');
         allBtns.forEach(function (b) {
           b.classList.remove('active');
         });
@@ -143,7 +143,7 @@ async function fetchCategories(listElement) {
 }
 
 async function fetchProducts(url, gridElement, countElement) {
-  gridElement.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+  gridElement.innerHTML = '<div class="col-span-full flex justify-center items-center py-20"><div class="w-10 h-10 border-4 border-slate-200 border-t-primary rounded-full animate-spin"></div></div>';
 
   try {
     var response = await fetch(url);
@@ -169,17 +169,17 @@ async function fetchProducts(url, gridElement, countElement) {
 
 function createProductCard(product) {
   var div = document.createElement('div');
-  div.className = 'product-card';
+  div.className = 'bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-slate-300 flex flex-col group';
 
   var html = '';
-  html += '<div class="product-image">';
-  html += '<img src="' + product.thumbnail + '" alt="' + product.title + '" loading="lazy">';
+  html += '<div class="h-[200px] w-full relative bg-slate-50 overflow-hidden">';
+  html += '<img src="' + product.thumbnail + '" alt="' + product.title + '" loading="lazy" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105">';
   html += '</div>';
-  html += '<div class="product-info">';
-  html += '<div class="product-cat">' + product.category + '</div>';
-  html += '<h3 class="product-title" title="' + product.title + '">' + product.title + '</h3>';
-  html += '<div class="product-price">$' + product.price + '</div>';
-  html += '<button class="add-cart-btn" onclick="addToCart(' + product.id + ')">';
+  html += '<div class="p-6 flex-1 flex flex-col">';
+  html += '<div class="text-xs uppercase text-slate-500 tracking-wider mb-2">' + product.category + '</div>';
+  html += '<h3 class="text-lg font-semibold mb-2 line-clamp-2" title="' + product.title + '">' + product.title + '</h3>';
+  html += '<div class="text-xl font-bold text-primary mt-auto mb-4">$' + product.price + '</div>';
+  html += '<button class="w-full py-3 bg-slate-50 text-dark rounded-lg font-medium transition-all hover:bg-primary hover:text-white flex items-center justify-center gap-2" onclick="addToCart(' + product.id + ')">';
   html += '<i class="ri-shopping-cart-2-line"></i> Add to Cart';
   html += '</button>';
   html += '</div>';
@@ -269,24 +269,24 @@ function renderCartItems() {
     subtotal += itemTotal;
 
     var itemEl = document.createElement('div');
-    itemEl.className = 'cart-item';
+    itemEl.className = 'flex items-center gap-4 p-4 border border-slate-100 rounded-lg mb-4 bg-white';
     itemEl.innerHTML = `
-      <div class="cart-item-image">
-        <img src="${item.thumbnail}" alt="${item.title}">
+      <div class="w-20 h-20 shrink-0">
+        <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-full object-cover rounded-md">
       </div>
-      <div class="cart-item-details">
-        <h3>${item.title}</h3>
-        <p class="cart-item-price">$${item.price}</p>
+      <div class="flex-1">
+        <h3 class="font-medium text-dark text-lg mb-1">${item.title}</h3>
+        <p class="text-slate-500">$${item.price}</p>
       </div>
-      <div class="cart-item-actions">
-        <div class="quantity-controls">
-          <button onclick="updateQuantity(${item.id}, -1)">-</button>
-          <span>${item.quantity}</span>
-          <button onclick="updateQuantity(${item.id}, 1)">+</button>
+      <div class="flex flex-col items-end gap-2">
+        <div class="flex items-center gap-2">
+          <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50">-</button>
+          <span class="w-6 text-center">${item.quantity}</span>
+          <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50">+</button>
         </div>
-        <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+        <button class="text-sm text-red-500 hover:text-red-700 hover:underline" onclick="removeFromCart(${item.id})">Remove</button>
       </div>
-      <div class="cart-item-total">
+      <div class="font-bold text-lg min-w-[80px] text-right">
         $${itemTotal.toFixed(2)}
       </div>
     `;

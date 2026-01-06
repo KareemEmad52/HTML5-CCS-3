@@ -7,101 +7,158 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
     rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#ffffff',
+            dark: '#0f172a',
+            light: '#f8fafc',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
+<body class="font-sans text-slate-700 bg-white leading-relaxed overflow-x-hidden">
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="logo">Luxe<span>Store</span></a>
-      <button class="menu-btn"><i class="ri-menu-line"></i></button>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="products.html" class="nav-link">Products</a>
-        <a href="about.html" class="nav-link active">About Us</a>
-        <a href="cart.html" class="nav-link">Cart <span id="cart-count-badge" class="badge">0</span></a>
-        <a href="login.html" class="nav-button btn btn-primary">Login</a>
+  <nav class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 h-[80px] flex items-center">
+    <div class="container mx-auto px-6 flex justify-between items-center w-full">
+      <a href="index.html" class="font-heading text-3xl font-bold text-dark">Luxe<span
+          class="text-primary">Store</span></a>
+      <button class="menu-btn md:hidden text-2xl text-dark"><i class="ri-menu-line"></i></button>
+      <div class="nav-links hidden md:flex gap-8 items-center">
+        <a href="index.html" class="font-medium text-dark relative transition-colors hover:text-primary group">Home<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="products.html"
+          class="font-medium text-dark relative transition-colors hover:text-primary group">Products<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="about.html"
+          class="font-medium text-dark relative transition-colors hover:text-primary group active text-primary">About
+          Us<span
+            class="absolute bottom-[-5px] left-0 w-full h-[2px] bg-primary transition-all duration-300"></span></a>
+        <a href="cart.html" class="font-medium text-dark relative transition-colors hover:text-primary group">Cart <span
+            id="cart-count-badge"
+            class="bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full hidden ml-1">0</span><span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="login.html"
+          class="inline-block px-6 py-3 rounded-lg font-medium transition-all duration-300 text-center bg-primary text-white hover:bg-blue-800 hover:-translate-y-0.5 hover:shadow-lg">Login</a>
       </div>
     </div>
   </nav>
 
-  <section class="page-header">
-    <div class="container">
-      <h1>Our Story</h1>
-      <p class="section-subtitle">Learn more about our journey and mission.</p>
+  <section class="bg-slate-50 py-32 text-center">
+    <div class="container mx-auto px-6">
+      <h1 class="text-5xl font-heading font-bold mb-4 text-dark">Our Story</h1>
+      <p class="text-xl text-slate-500 max-w-2xl mx-auto">Learn more about our journey and mission.</p>
     </div>
   </section>
 
-  <section class="container about-content">
-    <div class="about-image">
+  <section class="container mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-16">
+    <div class="flex-1">
       <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2032&auto=format&fit=crop"
-        alt="Our Team">
+        alt="Our Team" class="w-full rounded-xl shadow-lg">
     </div>
-    <div class="about-text">
-      <h2>Redefining the Shopping Experience</h2>
-      <p>Founded in 2024, LuxeStore began with a simple mission: to make premium products accessible to everyone. We
+    <div class="flex-1">
+      <h2 class="text-4xl font-heading font-bold mb-6 text-dark">Redefining the Shopping Experience</h2>
+      <p class="text-lg text-slate-600 mb-6 leading-relaxed">Founded in 2024, LuxeStore began with a simple mission: to
+        make premium products accessible to everyone. We
         believe that quality shouldn't exist only for the few.</p>
-      <p>Our team works tirelessly to curate a collection of items that combine style, functionality, and durability.
+      <p class="text-lg text-slate-600 mb-6 leading-relaxed">Our team works tirelessly to curate a collection of items
+        that combine style, functionality, and durability.
         From the latest tech gadgets to timeless fashion pieces, every item in our store is hand-picked for our
         discerning customers.</p>
-      <p>We're more than just an e-commerce store; we're a community of lifestyle enthusiasts who value quality and
+      <p class="text-lg text-slate-600 mb-6 leading-relaxed">We're more than just an e-commerce store; we're a community
+        of lifestyle enthusiasts who value quality and
         seamless experiences.</p>
     </div>
   </section>
 
-  <section class="stats">
-    <div class="container stats-grid">
-      <div class="stat-item">
-        <h3>10k+</h3>
-        <p>Happy Customers</p>
+  <section class="bg-primary text-white py-16">
+    <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="p-4">
+        <h3 class="text-5xl font-bold mb-2">10k+</h3>
+        <p class="text-lg opacity-90">Happy Customers</p>
       </div>
-      <div class="stat-item">
-        <h3>2k+</h3>
-        <p>Premium Products</p>
+      <div class="p-4">
+        <h3 class="text-5xl font-bold mb-2">2k+</h3>
+        <p class="text-lg opacity-90">Premium Products</p>
       </div>
-      <div class="stat-item">
-        <h3>50+</h3>
-        <p>Global Brands</p>
+      <div class="p-4">
+        <h3 class="text-5xl font-bold mb-2">50+</h3>
+        <p class="text-lg opacity-90">Global Brands</p>
       </div>
-      <div class="stat-item">
-        <h3>4.9</h3>
-        <p>Star Rating</p>
+      <div class="p-4">
+        <h3 class="text-5xl font-bold mb-2">4.9</h3>
+        <p class="text-lg opacity-90">Star Rating</p>
       </div>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
+  <footer class="bg-dark text-white pt-16 pb-0 mt-auto">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div class="footer-col">
-          <div class="logo" style="margin-bottom: 1rem; color: white;">Luxe<span>Store</span></div>
-          <p class="footer-main-text">Your one-stop destination for premium products. Quality meets seamless shopping.
-          </p>
+          <div class="font-heading text-2xl font-bold mb-4 text-white">Luxe<span class="text-primary">Store</span></div>
+          <p class="text-slate-400 mb-6">Your one-stop destination for premium products. Quality meets seamless
+            shopping.</p>
+          <div class="flex gap-4 mt-4">
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-facebook-fill"></i></a>
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-twitter-fill"></i></a>
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-instagram-fill"></i></a>
+          </div>
         </div>
 
         <div class="footer-col">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="login.html">Login</a></li>
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Home</a></li>
+            <li><a href="products.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Products</a>
+            </li>
+            <li><a href="about.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">About Us</a>
+            </li>
+            <li><a href="login.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Login</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Customer Care</h4>
-          <ul class="footer-links">
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Shipping Policy</a></li>
-            <li><a href="#">Returns & Exchanges</a></li>
-            <li><a href="#">Terms of Service</a></li>
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Customer Care</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">FAQ</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Shipping Policy</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Returns & Exchanges</a>
+            </li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Terms of Service</a>
+            </li>
           </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Newsletter</h4>
+          <p class="text-slate-400 mb-6">Subscribe to get special offers and updates.</p>
+          <form onsubmit="event.preventDefault();" class="flex gap-2">
+            <input type="email" placeholder="Your email"
+              class="p-3 rounded-lg border-none flex-1 text-slate-700 outline-none focus:ring-2 focus:ring-primary">
+            <button type="submit"
+              class="px-4 py-3 rounded-lg bg-primary text-white hover:bg-blue-600 transition-colors"><i
+                class="ri-send-plane-fill"></i></button>
+          </form>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="border-t border-white/10 py-6 text-center text-slate-400">
         <p>&copy; 2024 LuxeStore. All Rights Reserved.</p>
       </div>
     </div>

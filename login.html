@@ -7,104 +7,167 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
     rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#ffffff',
+            dark: '#0f172a',
+            light: '#f8fafc',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
+<body class="font-sans text-slate-700 bg-white leading-relaxed overflow-x-hidden">
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="logo">Luxe<span>Store</span></a>
-      <button class="menu-btn"><i class="ri-menu-line"></i></button>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="products.html" class="nav-link">Products</a>
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="cart.html" class="nav-link">Cart <span id="cart-count-badge" class="badge">0</span></a>
-        <a href="login.html" class="nav-button btn btn-primary">Login</a>
+  <nav class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 h-[80px] flex items-center">
+    <div class="container mx-auto px-6 flex justify-between items-center w-full">
+      <a href="index.html" class="font-heading text-3xl font-bold text-dark">Luxe<span
+          class="text-primary">Store</span></a>
+      <button class="menu-btn md:hidden text-2xl text-dark"><i class="ri-menu-line"></i></button>
+      <div class="nav-links hidden md:flex gap-8 items-center">
+        <a href="index.html" class="font-medium text-dark relative transition-colors hover:text-primary group">Home<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="products.html"
+          class="font-medium text-dark relative transition-colors hover:text-primary group">Products<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="about.html" class="font-medium text-dark relative transition-colors hover:text-primary group">About
+          Us<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="cart.html" class="font-medium text-dark relative transition-colors hover:text-primary group">Cart <span
+            id="cart-count-badge"
+            class="bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full hidden ml-1">0</span><span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="login.html"
+          class="inline-block px-6 py-3 rounded-lg font-medium transition-all duration-300 text-center bg-primary text-white hover:bg-blue-800 hover:-translate-y-0.5 hover:shadow-lg shadow-blue-500/20">Login</a>
       </div>
     </div>
   </nav>
 
-  <section class="login-section">
-    <div class="login-card">
-      <div class="login-header">
-        <h1>Welcome Back</h1>
-        <p>Please enter your details to sign in.</p>
+  <section class="flex items-center justify-center min-h-[calc(100vh-80px)] p-8 mt-[80px] bg-slate-50">
+    <div class="bg-white p-12 rounded-xl shadow-xl w-full max-w-[450px] border border-slate-100">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-heading mb-2 text-dark font-bold">Welcome Back</h1>
+        <p class="text-slate-500">Please enter your details to sign in.</p>
       </div>
 
       <form onsubmit="event.preventDefault(); alert('Logged in successfully!');">
-        <div class="form-group">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+        <div class="mb-6">
+          <label for="email" class="block mb-2 font-medium text-dark">Email Address</label>
+          <input type="email" id="email"
+            class="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-blue-100 transition-all font-sans text-slate-600 placeholder:text-slate-400"
+            placeholder="Enter your email" required>
         </div>
 
-        <div class="form-group">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+        <div class="mb-6">
+          <label for="password" class="block mb-2 font-medium text-dark">Password</label>
+          <input type="password" id="password"
+            class="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-blue-100 transition-all font-sans text-slate-600 placeholder:text-slate-400"
+            placeholder="Enter your password" required>
         </div>
 
-        <div class="form-actions">
-          <label class="form-check">
-            <input type="checkbox">
+        <div class="flex justify-between items-center mb-8 text-sm">
+          <label class="flex items-center gap-2 cursor-pointer text-slate-600">
+            <input type="checkbox" class="rounded text-primary focus:ring-primary border-slate-300">
             <span>Remember me</span>
           </label>
-          <a href="#" class="forgot-pass">Forgot password?</a>
+          <a href="#" class="text-primary hover:text-blue-700 font-medium">Forgot password?</a>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+        <button type="submit"
+          class="w-full py-3 bg-primary text-white rounded-lg font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">Sign
+          In</button>
       </form>
 
-      <div class="social-login">
-        <div class="social-divider"><span>Or continue with</span></div>
+      <div class="mt-8 text-center">
+        <div
+          class="flex items-center my-6 text-slate-400 text-sm gap-4 before:flex-1 before:h-[1px] before:bg-slate-200 after:flex-1 after:h-[1px] after:bg-slate-200">
+          <span>Or continue with</span></div>
 
-        <button class="social-btn">
+        <button
+          class="w-full flex items-center justify-center gap-3 py-3 border border-slate-200 rounded-lg bg-white text-slate-700 hover:bg-slate-50 transition-colors mb-4 font-medium">
           <i class="ri-google-fill" style="color: #EA4335;"></i>
           <span>Google</span>
         </button>
-        <button class="social-btn">
+        <button
+          class="w-full flex items-center justify-center gap-3 py-3 border border-slate-200 rounded-lg bg-white text-slate-700 hover:bg-slate-50 transition-colors mb-4 font-medium">
           <i class="ri-facebook-fill" style="color: #1877F2;"></i>
           <span>Facebook</span>
         </button>
       </div>
 
-      <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem;">
-        Don't have an account? <a href="#" style="color: #2563eb; font-weight: 500;">Sign up</a>
+      <p class="text-center mt-6 text-sm text-slate-500">
+        Don't have an account? <a href="#" class="text-primary font-medium hover:underline">Sign up</a>
       </p>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
+  <footer class="bg-dark text-white pt-16 pb-0 mt-auto">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div class="footer-col">
-          <div class="logo" style="margin-bottom: 1rem; color: white;">Luxe<span>Store</span></div>
-          <p class="footer-main-text">Your one-stop destination for premium products. Quality meets seamless shopping.
-          </p>
+          <div class="font-heading text-2xl font-bold mb-4 text-white">Luxe<span class="text-primary">Store</span></div>
+          <p class="text-slate-400 mb-6">Your one-stop destination for premium products. Quality meets seamless
+            shopping.</p>
+          <div class="flex gap-4 mt-4">
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-facebook-fill"></i></a>
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-twitter-fill"></i></a>
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-instagram-fill"></i></a>
+          </div>
         </div>
 
         <div class="footer-col">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="login.html">Login</a></li>
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Home</a></li>
+            <li><a href="products.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Products</a>
+            </li>
+            <li><a href="about.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">About Us</a>
+            </li>
+            <li><a href="login.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Login</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Customer Care</h4>
-          <ul class="footer-links">
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Shipping Policy</a></li>
-            <li><a href="#">Returns & Exchanges</a></li>
-            <li><a href="#">Terms of Service</a></li>
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Customer Care</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">FAQ</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Shipping Policy</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Returns & Exchanges</a>
+            </li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Terms of Service</a>
+            </li>
           </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Newsletter</h4>
+          <p class="text-slate-400 mb-6">Subscribe to get special offers and updates.</p>
+          <form onsubmit="event.preventDefault();" class="flex gap-2">
+            <input type="email" placeholder="Your email"
+              class="p-3 rounded-lg border-none flex-1 text-slate-700 outline-none focus:ring-2 focus:ring-primary">
+            <button type="submit"
+              class="px-4 py-3 rounded-lg bg-primary text-white hover:bg-blue-600 transition-colors"><i
+                class="ri-send-plane-fill"></i></button>
+          </form>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="border-t border-white/10 py-6 text-center text-slate-400">
         <p>&copy; 2024 LuxeStore. All Rights Reserved.</p>
       </div>
     </div>

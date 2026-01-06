@@ -7,88 +7,143 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
     rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#ffffff',
+            dark: '#0f172a',
+            light: '#f8fafc',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
+<body class="font-sans text-slate-700 bg-white leading-relaxed overflow-x-hidden">
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="logo">Luxe<span>Store</span></a>
-      <button class="menu-btn"><i class="ri-menu-line"></i></button>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="products.html" class="nav-link">Products</a>
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="cart.html" class="nav-link active">Cart <span id="cart-count-badge" class="badge">0</span></a>
-        <a href="login.html" class="nav-button btn btn-primary">Login</a>
+  <nav class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 h-[80px] flex items-center">
+    <div class="container mx-auto px-6 flex justify-between items-center w-full">
+      <a href="index.html" class="font-heading text-3xl font-bold text-dark">Luxe<span
+          class="text-primary">Store</span></a>
+      <button class="menu-btn md:hidden text-2xl text-dark"><i class="ri-menu-line"></i></button>
+      <div class="nav-links hidden md:flex gap-8 items-center">
+        <a href="index.html" class="font-medium text-dark relative transition-colors hover:text-primary group">Home<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="products.html"
+          class="font-medium text-dark relative transition-colors hover:text-primary group">Products<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="about.html" class="font-medium text-dark relative transition-colors hover:text-primary group">About
+          Us<span
+            class="absolute bottom-[-5px] left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span></a>
+        <a href="cart.html"
+          class="font-medium text-dark relative transition-colors hover:text-primary group active text-primary">Cart
+          <span id="cart-count-badge"
+            class="bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full hidden ml-1">0</span><span
+            class="absolute bottom-[-5px] left-0 w-full h-[2px] bg-primary transition-all duration-300"></span></a>
+        <a href="login.html"
+          class="inline-block px-6 py-3 rounded-lg font-medium transition-all duration-300 text-center bg-primary text-white hover:bg-blue-800 hover:-translate-y-0.5 hover:shadow-lg shadow-blue-500/20">Login</a>
       </div>
     </div>
   </nav>
 
-  <div class="container">
-    <main class="cart-page">
-      <h1>Your Cart</h1>
+  <div class="container mx-auto px-6 py-8 min-h-[60vh] mt-[80px]">
+    <h1 class="text-3xl font-heading font-bold mb-6 text-dark">Your Cart</h1>
 
-      <div id="empty-cart-message" style="display: none;">
-        <p>Your cart is empty.</p>
-        <a href="products.html" class="btn btn-secondary" style="margin-top: 1rem; display: inline-block;">Start
-          Shopping</a>
+    <div id="empty-cart-message" class="hidden text-center py-12">
+      <p class="text-slate-500 text-lg mb-4">Your cart is empty.</p>
+      <a href="products.html"
+        class="inline-block px-6 py-3 rounded-lg font-medium transition-all duration-300 text-center bg-white text-dark border border-slate-200 hover:bg-slate-50 hover:border-slate-400">Start
+        Shopping</a>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 mt-8">
+      <div id="cart-items-container" class="flex-[2] min-w-[300px]">
+        <!-- Cart items injected here -->
       </div>
 
-      <div class="cart-layout">
-        <div id="cart-items-container" class="cart-items">
-          <!-- Cart items injected here -->
+      <div id="cart-summary"
+        class="hidden flex-1 min-w-[250px] bg-slate-50 p-6 rounded-xl border border-slate-200 h-fit sticky top-[100px]">
+        <h2 class="text-xl font-heading font-bold mb-6 text-dark">Summary</h2>
+        <div class="flex justify-between mb-4 text-lg text-slate-600">
+          <span>Subtotal</span>
+          <span id="cart-subtotal" class="font-medium text-dark">$0.00</span>
         </div>
-
-        <div id="cart-summary" class="cart-summary" style="display: none;">
-          <h2>Summary</h2>
-          <div class="summary-row">
-            <span>Subtotal</span>
-            <span id="cart-subtotal">$0.00</span>
-          </div>
-          <div class="summary-row total">
-            <span>Total</span>
-            <span id="cart-total">$0.00</span>
-          </div>
-          <button class="btn btn-primary btn-block">Proceed to Checkout</button>
+        <div class="flex justify-between border-t border-slate-200 pt-4 mt-4 text-xl font-bold text-dark">
+          <span>Total</span>
+          <span id="cart-total">$0.00</span>
         </div>
+        <button
+          class="w-full mt-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">Proceed
+          to Checkout</button>
       </div>
-
-    </main>
+    </div>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
+  <footer class="bg-dark text-white pt-16 pb-0 mt-auto">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div class="footer-col">
-          <div class="logo" style="margin-bottom: 1rem; color: white;">Luxe<span>Store</span></div>
-          <p class="footer-main-text">Your one-stop destination for premium products. Quality meets seamless shopping.
-          </p>
+          <div class="font-heading text-2xl font-bold mb-4 text-white">Luxe<span class="text-primary">Store</span></div>
+          <p class="text-slate-400 mb-6">Your one-stop destination for premium products. Quality meets seamless
+            shopping.</p>
+          <div class="flex gap-4 mt-4">
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-facebook-fill"></i></a>
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-twitter-fill"></i></a>
+            <a href="#" class="text-white text-2xl hover:text-primary transition-colors"><i
+                class="ri-instagram-fill"></i></a>
+          </div>
         </div>
 
         <div class="footer-col">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="login.html">Login</a></li>
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Home</a></li>
+            <li><a href="products.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Products</a>
+            </li>
+            <li><a href="about.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">About Us</a>
+            </li>
+            <li><a href="login.html" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Login</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Customer Care</h4>
-          <ul class="footer-links">
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Shipping Policy</a></li>
-            <li><a href="#">Returns & Exchanges</a></li>
-            <li><a href="#">Terms of Service</a></li>
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Customer Care</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">FAQ</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Shipping Policy</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Returns & Exchanges</a>
+            </li>
+            <li><a href="#" class="text-slate-400 hover:text-white hover:pl-1.5 transition-all">Terms of Service</a>
+            </li>
           </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="text-white mb-6 text-xl font-heading font-medium">Newsletter</h4>
+          <p class="text-slate-400 mb-6">Subscribe to get special offers and updates.</p>
+          <form onsubmit="event.preventDefault();" class="flex gap-2">
+            <input type="email" placeholder="Your email"
+              class="p-3 rounded-lg border-none flex-1 text-slate-700 outline-none focus:ring-2 focus:ring-primary">
+            <button type="submit"
+              class="px-4 py-3 rounded-lg bg-primary text-white hover:bg-blue-600 transition-colors"><i
+                class="ri-send-plane-fill"></i></button>
+          </form>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="border-t border-white/10 py-6 text-center text-slate-400">
         <p>&copy; 2024 LuxeStore. All Rights Reserved.</p>
       </div>
     </div>
